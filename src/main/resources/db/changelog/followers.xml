@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <!-- Create the Followers table -->
+    <changeSet id="create-followers-table" author="P_Bharath_Kumar">
+        <createTable tableName="followers">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="int" >
+                <!-- Define a foreign key constraint referencing users.id -->
+                <constraints
+                        nullable="false"
+                        foreignKeyName="fk_followers_users"
+                        references="users(id)" deleteCascade="true"/>
+            </column>
+            <column name="follower_user_id" type="int" >
+                <!-- Define a foreign key constraint referencing users.id -->
+                <constraints
+                        nullable="false"
+                        foreignKeyName="fk_followers_follower_users"
+                        references="users(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

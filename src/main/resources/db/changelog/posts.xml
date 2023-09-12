@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <!-- Create the Posts table -->
+    <changeSet id="create-posts-table" author="P_Bharath_Kumar">
+        <createTable tableName="posts">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="int" >
+                <!-- Define a foreign key constraint referencing users.id -->
+                <constraints
+                        nullable="false"
+                        foreignKeyName="fk_posts_users"
+                        references="users(id)" deleteCascade="true"/>
+            </column>
+            <column name="caption" type="varchar(255)"/>
+            <column name="created_at" type="datetime"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
