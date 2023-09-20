@@ -1,9 +1,17 @@
 package com.instagram.rest;
 
+import com.instagram.dto.AuthenticationRequest;
 import com.instagram.entities.User;
+import com.instagram.service.JwtService;
 import com.instagram.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,36 +20,62 @@ import java.util.List;
 public class UserController {
    @Autowired
     UserService userService;
+
+   @Autowired
+   private JwtService jwtService;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+
+
     @Operation(summary = "get the list of users")
-    @GetMapping("list/users")
+    @GetMapping("/admin/list/users")
+    //@PreAuthorize("hasAuthority('admin')")
     public List<User> listUsers(){
         return userService.getAllUsers();
     }
 
     @Operation(summary = "get the user details by userId")
-    @GetMapping("user/{id}")
+    @GetMapping("/user/{id}")
+    @PreAuthorize("hasAuthority('user')")
     public User getUser(@PathVariable("id") Integer id){
         return userService.getUserById(id);
     }
 
 
     @Operation(summary = "create a new user")
-    @PostMapping("/user")
+    @PostMapping("/create")
     public User createUser(@RequestBody User user){
+        BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
+        String encryptedPwd = bcrypt.encode(user.getPassword());
+        user.setPassword(encryptedPwd);
         return  userService.createUser(user);
     }
 
     @Operation(summary = "update username by taking input userId")
-    @PutMapping("user/{id}/{uName}")
-    public User updateUserName(@PathVariable("id") Integer id, @PathVariable("uName") String name){
+    @PutMapping("/user/{id}/{username}")
+    public User updateUserName(@PathVariable("id") Integer id, @PathVariable("username") String name){
         return userService.updateUser(id, name);
     }
 
     @Operation(summary = "delete the user")
-    @DeleteMapping("User/{id}")
+    @DeleteMapping("admin/delete/{id}")
     public String deleteUser(@PathVariable("id") Integer id){
         return userService.deleteUser(id);
     }
+
+
+    @PostMapping("/authenticate")
+    public String authenticateAndGetToken(@RequestBody AuthenticationRequest authenticationRequest){
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUserName(), authenticationRequest.getPassword()));
+        if(authentication.isAuthenticated()){
+            return jwtService.generateToken(authenticationRequest.getUserName());
+        }
+
+        throw new UsernameNotFoundException("invalid user request !!!!");
+
+   }
 
 
 

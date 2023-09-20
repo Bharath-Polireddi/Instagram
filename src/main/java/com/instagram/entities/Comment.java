@@ -16,15 +16,13 @@ public class Comment {
     private  String comment;
 
     private Integer postId;
+    private Integer userId;
+
 
     @Column(name ="commented_at")
     private LocalDateTime commentedAt;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name ="userId")
-    @JsonIgnore
-    private User commentUser;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "postId", insertable = false,updatable = false)
@@ -39,13 +37,7 @@ public class Comment {
         this.postId = postId;
     }
 
-    public User getCommentUser() {
-        return commentUser;
-    }
 
-    public void setCommentUser(User commentUser) {
-        this.commentUser = commentUser;
-    }
 
     public int getCommentId() {
         return commentId;
@@ -71,13 +63,6 @@ public class Comment {
         this.commentedAt = commentedAt;
     }
 
-    public User getCommentUserId() {
-        return commentUser;
-    }
-
-    public void setCommentUserId(User commentUserId) {
-        this.commentUser = commentUserId;
-    }
 
     public Post getPostCommented() {
         return postCommented;
@@ -85,6 +70,14 @@ public class Comment {
 
     public void setPostCommented(Post postCommented) {
         this.postCommented = postCommented;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }
 

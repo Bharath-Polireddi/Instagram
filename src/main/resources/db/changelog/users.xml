@@ -9,53 +9,25 @@
             <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="full_name" type="varchar(25)" >
-                    <constraints nullable = "false"/>
-            </column>
-            <column name="email" type="varchar(20)">
+            <column name="name" type="varchar(30)">
+                <constraints nullable="false"/>
+        </column>
+            <column name="email" type="varchar(50)">
                 <constraints nullable="false"/>
             </column>
-            <column name="password" type="varchar(15)">
+            <column name="username" type="varchar(25)">
                 <constraints nullable="false"/>
             </column>
-            <column name="username" type="varchar(10)">
+            <column name="password" type="varchar(200)">
                 <constraints nullable="false"/>
             </column>
-            <column name="bio" type="varchar(255)"/>
-            <column name="followers_count" type="int" defaultValue="0"/>
+            <column name="role" type="varchar(25)">
+                <constraints nullable="false"/>
+            </column>
 
-            <column name="following_count" type="int" defaultValue="0"/>
-            <column name="profile_pic_url" type="varchar(100)"/>
         </createTable>
     </changeSet>
 
-    <changeSet id="insert-user-values-1" author="P_Bharath_Kumar">
-        <insert tableName="users">
-            <column name="full_name" value="Michael Scofield"/>
-            <column name = "email" value="michael@gmail.com"/>
-            <column name="password" value="Michael@21"/>
-            <column name="username" value="m_scofield" />
-            <column name="bio" value="Prison Break" />
-            <column name = "followers_count" value="4"/>
-            <column name="following_count" value="4"/>
-            <column name="profile_pic_url" value="https://d1tgh8fmlzexmh.cloudfront.net/ccbp-static-website/chatbg.png"/>
-        </insert>
-    </changeSet>
-
-    <changeSet id="insert-user-values-2" author="P_Bharath_Kumar">
-    <insert tableName="users">
-        <column name="full_name" value="Sara Tancredi"/>
-        <column name = "email" value="sara@gmail.com"/>
-        <column name="password" value="Tancredi@s"/>
-        <column name="username" value="sara__tan" />
-        <column name="bio" value="Prison Break" />
-        <column name = "followers_count" value="4"/>
-        <column name="following_count" value="4"/>
-        <column name="profile_pic_url" value="https://d1tgh8fmlzexmh.cloudfront.net/ccbp-static-website/codingbg.png"/>
-
-    </insert>
-</changeSet>
 
 
-
-        </databaseChangeLog>
+</databaseChangeLog>

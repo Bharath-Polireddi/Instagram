@@ -14,42 +14,39 @@ public class User {
     @Column(name = "id")
     private int userId;
 
-    @Column(name = "full_name")
+    @Column(name = "name")
     private String fullName;
 
     private String email;
+
+    @Column(name = "username")
+    private String userName;
     private String password;
-    private String username;
 
-    private String bio;
+    private String role;
 
-    @Column(name = "followers_count")
-    private Integer followersCount;
-
-    @Column(name = "following_count")
-    private Integer followingCount;
-
-    @Column(name = "profile_pic_url")
-    private String picture;
 
     @OneToMany(mappedBy = "postUser")
     @JsonIgnore
     private List<Post> userPosts = new ArrayList<Post>();
 
     @OneToMany(mappedBy = "imageUser")
+    @JsonIgnore
     private List<Image> userImages = new ArrayList<Image>();
 
     @OneToMany(mappedBy = "likedUser")
+    @JsonIgnore
     private List<Like> userLikes = new ArrayList<Like>();
 
-    @OneToMany(mappedBy = "commentUser")
-    private List<Comment> userComments = new ArrayList<Comment>();
+
 
     @OneToMany(mappedBy = "mainUser")
+    @JsonIgnore
     private List<Follow> user = new ArrayList<Follow>();
 
 
     @OneToMany(mappedBy = "followingUser")
+    @JsonIgnore
     private List<Follow> followers = new ArrayList<Follow>();
 
     public int getUserId() {
@@ -84,45 +81,22 @@ public class User {
         this.password = password;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getBio() {
-        return bio;
+    public String getRole() {
+        return role;
     }
 
-    public void setBio(String bio) {
-        this.bio = bio;
+    public void setRole(String role) {
+        this.role = role;
     }
 
-    public Integer getFollowersCount() {
-        return followersCount;
-    }
-
-    public void setFollowersCount(Integer followersCount) {
-        this.followersCount = followersCount;
-    }
-
-    public Integer getFollowingCount() {
-        return followingCount;
-    }
-
-    public void setFollowingCount(Integer followingCount) {
-        this.followingCount = followingCount;
-    }
-
-    public String getPicture() {
-        return picture;
-    }
-
-    public void setPicture(String picture) {
-        this.picture = picture;
-    }
 
     public List<Post> getUserPosts() {
         return userPosts;
@@ -148,13 +122,7 @@ public class User {
         this.userLikes = userLikes;
     }
 
-    public List<Comment> getUserComments() {
-        return userComments;
-    }
 
-    public void setUserComments(List<Comment> userComments) {
-        this.userComments = userComments;
-    }
 
     public List<Follow> getUser() {
         return user;
