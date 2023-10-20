@@ -1,7 +1,7 @@
 package com.instagram.rest;
 
 import com.instagram.dto.AuthenticationRequest;
-import com.instagram.entities.User;
+import com.instagram.model.User;
 import com.instagram.service.JwtService;
 import com.instagram.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+
 public class UserController {
    @Autowired
     UserService userService;
@@ -45,7 +46,7 @@ public class UserController {
 
 
     @Operation(summary = "create a new user")
-    @PostMapping("/create")
+    @PostMapping("/new/account")
     public User createUser(@RequestBody User user){
         BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
         String encryptedPwd = bcrypt.encode(user.getPassword());
@@ -60,12 +61,12 @@ public class UserController {
     }
 
     @Operation(summary = "delete the user")
-    @DeleteMapping("admin/delete/{id}")
+    @DeleteMapping("/admin/{id}")
     public String deleteUser(@PathVariable("id") Integer id){
         return userService.deleteUser(id);
     }
 
-
+    @Operation(summary = "get JWT by entering username and password")
     @PostMapping("/authenticate")
     public String authenticateAndGetToken(@RequestBody AuthenticationRequest authenticationRequest){
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUserName(), authenticationRequest.getPassword()));

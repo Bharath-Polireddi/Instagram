@@ -1,4 +1,4 @@
-package com.instagram.entities;
+package com.instagram.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -37,7 +37,7 @@ public class Post {
 
     @OneToMany(mappedBy = "postImages")
     @JsonIgnore
-    private List<Image> postedImages = new ArrayList<Image>();
+    private List<Media> postedMedia = new ArrayList<Media>();
 
     @OneToMany(mappedBy = "postLiked")
     @JsonIgnore
@@ -79,12 +79,12 @@ public class Post {
         this.postUser = postUser;
     }
 
-    public List<Image> getPostedImages() {
-        return postedImages;
+    public List<Media> getPostedImages() {
+        return postedMedia;
     }
 
-    public void setPostedImages(List<Image> postedImages) {
-        this.postedImages = postedImages;
+    public void setPostedImages(List<Media> postedMedia) {
+        this.postedMedia = postedMedia;
     }
 
     public List<Like> getLikedPosts() {

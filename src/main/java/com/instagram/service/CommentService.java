@@ -1,6 +1,6 @@
 package com.instagram.service;
 
-import com.instagram.entities.Comment;
+import com.instagram.model.Comment;
 
 import java.util.List;
 

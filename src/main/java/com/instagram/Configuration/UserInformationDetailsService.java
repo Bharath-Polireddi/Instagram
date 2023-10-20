@@ -1,6 +1,6 @@
 package com.instagram.Configuration;
 
-import com.instagram.entities.User;
+import com.instagram.model.User;
 import com.instagram.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

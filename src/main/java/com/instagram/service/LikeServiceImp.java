@@ -1,6 +1,5 @@
 package com.instagram.service;
 
-import com.instagram.repo.ImageRepo;
 import com.instagram.repo.LikeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

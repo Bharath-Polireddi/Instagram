@@ -1,6 +1,6 @@
 package com.instagram.service;
 
-import com.instagram.entities.User;
+import com.instagram.model.User;
 import com.instagram.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +14,13 @@ import java.util.Optional;
 public class UserServiceImp implements UserService {
     @Autowired
     private UserRepo usersRepo;
+
+    public UserServiceImp(UserRepo usersRepo) {
+        this.usersRepo = usersRepo;
+    }
+
+    public UserServiceImp() {
+    }
 
     @Override
     public List<User> getAllUsers() {

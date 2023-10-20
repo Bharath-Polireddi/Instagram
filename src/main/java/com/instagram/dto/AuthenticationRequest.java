@@ -1,5 +1,8 @@
 package com.instagram.dto;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 public class AuthenticationRequest {
 
     private String userName;

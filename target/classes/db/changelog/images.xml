@@ -27,4 +27,25 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="changeImageUrl" author="P_Bharath_Kumar">
+        <renameColumn tableName="images" oldColumnName="image_url" newColumnName="mediaPath"/>
+    </changeSet>
+
+    <changeSet id="addMediaTypeColumn" author="P_Bharath_Kumar">
+      <addColumn tableName="images">
+          <column name="mediaType" type="varchar(255)">
+          </column>
+      </addColumn> 
+
+    </changeSet> 
+    
+    <changeSet id="addMediaName" author="P_Bharath_Kumar">
+        <addColumn tableName="images">
+            <column name="name" type="varchar(255)" >
+            </column>
+        </addColumn>
+    </changeSet>
+
+
+
 </databaseChangeLog>

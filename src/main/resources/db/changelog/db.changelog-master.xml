@@ -4,10 +4,10 @@
                                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
 
     <include file="classpath:/db/changelog/users.xml"/>
-   <include file="classpath:/db/changelog/posts.xml"/>
+    <include file="classpath:/db/changelog/posts.xml"/>
     <include file="classpath:/db/changelog/images.xml"/>
     <include file="classpath:/db/changelog/likes.xml"/>
-   <include file="classpath:/db/changelog/comments.xml"/>
+    <include file="classpath:/db/changelog/comments.xml"/>
     <include file="classpath:/db/changelog/followers.xml"/>
    <!-- Add more include directives for additional changelog files -->
 

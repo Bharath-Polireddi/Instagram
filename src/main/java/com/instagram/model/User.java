@@ -1,14 +1,16 @@
-package com.instagram.entities;
+package com.instagram.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name ="users")
-public class User {
+@NoArgsConstructor
+public class User  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -25,6 +27,13 @@ public class User {
 
     private String role;
 
+    public User(int userId, String email, String userName, String password, String role) {
+        this.userId = userId;
+        this.email = email;
+        this.userName = userName;
+        this.password = password;
+        this.role = role;
+    }
 
     @OneToMany(mappedBy = "postUser")
     @JsonIgnore
@@ -32,7 +41,7 @@ public class User {
 
     @OneToMany(mappedBy = "imageUser")
     @JsonIgnore
-    private List<Image> userImages = new ArrayList<Image>();
+    private List<Media> userMedia = new ArrayList<Media>();
 
     @OneToMany(mappedBy = "likedUser")
     @JsonIgnore
@@ -48,6 +57,9 @@ public class User {
     @OneToMany(mappedBy = "followingUser")
     @JsonIgnore
     private List<Follow> followers = new ArrayList<Follow>();
+
+
+
 
     public int getUserId() {
         return userId;
@@ -105,13 +117,13 @@ public class User {
     public void setUserPosts(List<Post> userPosts) {
         this.userPosts = userPosts;
     }
-
-    public List<Image> getUserImages() {
-        return userImages;
+    @JsonIgnore
+    public List<Media> getUserImages() {
+        return userMedia;
     }
-
-    public void setUserImages(List<Image> userImages) {
-        this.userImages = userImages;
+@JsonIgnore
+    public void setUserImages(List<Media> userMedia) {
+        this.userMedia = userMedia;
     }
 
     public List<Like> getUserLikes() {

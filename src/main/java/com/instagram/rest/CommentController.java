@@ -1,6 +1,6 @@
 package com.instagram.rest;
 
-import com.instagram.entities.Comment;
+import com.instagram.model.Comment;
 import com.instagram.service.CommentService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class CommentController {
         return  commentService.getComments(PostId);
     }
 
-    @GetMapping("/user/commentsCount/{postId}")
+    @GetMapping("/user/comments-count/{postId}")
     @Operation(summary = "get the total number of comments of a post")
     public String getCommentsCount(@PathVariable("postId") Integer postId){
         Integer count =   commentService.getCommentsCount(postId);

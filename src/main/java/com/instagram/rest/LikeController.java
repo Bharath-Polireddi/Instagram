@@ -8,13 +8,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @RestController
 public class LikeController {
     @Autowired
     LikeService likeService;
 
 
-    @GetMapping("/likesCount/{PostId}")
+
+
+    @GetMapping("/likes-count/{PostId}")
     @Operation(summary = "get the number of users liked a post")
     public Integer getLikesCount(@PathVariable("PostId") Integer postId){
         return likeService.noOfLikes(postId);

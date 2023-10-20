@@ -1,6 +1,6 @@
 package com.instagram.service;
 
-import com.instagram.entities.Post;
+import com.instagram.model.Post;
 import com.instagram.repo.PostRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

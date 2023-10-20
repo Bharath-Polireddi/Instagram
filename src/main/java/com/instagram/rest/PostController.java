@@ -1,6 +1,6 @@
 package com.instagram.rest;
 
-import com.instagram.entities.Post;
+import com.instagram.model.Post;
 import com.instagram.service.PostService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,23 +19,25 @@ public class PostController {
         return postService.getPosts(id);
     }
 
-
+    @Operation(summary = "delete the post by taking input userId")
     @DeleteMapping("/user/remove/post/{id}")
     public String deletePost(@PathVariable("id") Integer id){
         return postService.deletePost(id);
     }
 
+    @Operation(summary = "update caption of the post")
     @PutMapping ("/user/caption/{id}/{caption}")
     public Post updatePost(@PathVariable("id") Integer id, @PathVariable("caption") String caption){
       return postService.updatePost(id, caption);
     }
-
-    @PostMapping("/user/create/post")
+    @Operation(summary = "create new post ")
+    @PostMapping("/user/new/post")
     public Post createPost(@RequestBody Post post){
         return postService.createPost(post);
     }
 
-    @GetMapping("/noOfPosts/{id}")
+    @Operation(summary = "get the number of posts of a user")
+    @GetMapping("/no-of-Posts/{id}")
     public Integer postsCount(@PathVariable("id") Integer userId){
         return  postService.noOfPosts(userId);
     }

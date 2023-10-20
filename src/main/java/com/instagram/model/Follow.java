@@ -1,4 +1,4 @@
-package com.instagram.entities;
+package com.instagram.model;
 
 import jakarta.persistence.*;
 

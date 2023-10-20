@@ -1,4 +1,4 @@
-package com.instagram.entities;
+package com.instagram.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

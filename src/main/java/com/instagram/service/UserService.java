@@ -1,6 +1,6 @@
 package com.instagram.service;
 
-import com.instagram.entities.User;
+import com.instagram.model.User;
 
 import java.util.List;
 

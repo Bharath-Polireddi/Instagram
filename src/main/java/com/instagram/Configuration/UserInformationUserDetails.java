@@ -1,6 +1,6 @@
 package com.instagram.Configuration;
 
-import com.instagram.entities.User;
+import com.instagram.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

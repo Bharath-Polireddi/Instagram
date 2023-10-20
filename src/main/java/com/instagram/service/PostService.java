@@ -1,6 +1,6 @@
 package com.instagram.service;
 
-import com.instagram.entities.Post;
+import com.instagram.model.Post;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
