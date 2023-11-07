@@ -9,6 +9,7 @@
     <include file="classpath:/db/changelog/likes.xml"/>
     <include file="classpath:/db/changelog/comments.xml"/>
     <include file="classpath:/db/changelog/followers.xml"/>
+    <include file="classpath:/db/changelog/refreshToken.xml"/>
    <!-- Add more include directives for additional changelog files -->
 
 </databaseChangeLog>

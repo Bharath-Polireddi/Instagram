@@ -1,8 +1,12 @@
 package com.instagram.rest;
 
 import com.instagram.dto.AuthenticationRequest;
+import com.instagram.dto.JwtResponse;
+import com.instagram.dto.RefreshTokenRequest;
+import com.instagram.model.RefreshToken;
 import com.instagram.model.User;
 import com.instagram.service.JwtService;
+import com.instagram.service.RefreshTokenService;
 import com.instagram.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +31,9 @@ public class UserController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private RefreshTokenService refreshTokenService;
 
 
 
@@ -66,15 +73,33 @@ public class UserController {
         return userService.deleteUser(id);
     }
 
-    @Operation(summary = "get JWT by entering username and password")
+    @Operation(summary = "get JWT and UUID by entering username and password")
     @PostMapping("/authenticate")
-    public String authenticateAndGetToken(@RequestBody AuthenticationRequest authenticationRequest){
+    public JwtResponse authenticateAndGetToken(@RequestBody AuthenticationRequest authenticationRequest) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUserName(), authenticationRequest.getPassword()));
         if(authentication.isAuthenticated()){
-            return jwtService.generateToken(authenticationRequest.getUserName());
+            RefreshToken refreshToken = refreshTokenService.createRefreshToken(authenticationRequest.getUserName());
+            return JwtResponse.builder()
+                    .accessToken(jwtService.generateToken(authenticationRequest.getUserName()))
+                    .Token(refreshToken.getToken()).build();
         }
 
         throw new UsernameNotFoundException("invalid user request !!!!");
+
+    }
+
+    @PostMapping("/refreshToken")
+    public JwtResponse refreshToken(@RequestBody RefreshTokenRequest refreshTokenRequest) {
+        return refreshTokenService.findByToken(refreshTokenRequest.getToken())
+                .map(refreshTokenService::verifyExpiration)
+                .map(RefreshToken::getUser)
+                .map(User -> {
+                    String accessToken = jwtService.generateToken(User.getUserName());
+                    return JwtResponse.builder()
+                            .accessToken(accessToken)
+                            .Token(refreshTokenRequest.getToken())
+                            .build();
+                }).orElseThrow(() -> new RuntimeException("Refresh token is not in database"));
 
    }
 
